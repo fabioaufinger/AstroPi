@@ -5,8 +5,8 @@ import pygame.camera
 pygame.init()
 pygame.camera.init()
 
-WIDTH = 1280
-HEIGHT = 720
+WIDTH = 480
+HEIGHT = 320
 
 black = (0, 0, 0)
 red = (255, 0, 0)
@@ -59,7 +59,7 @@ while True:
     screen.blit(image1,(25, 25))
     
     
-    button("EXIT", 740, 480, 100, 50, darkred, red, quit_programm)
+    button("EXIT", 0, 0, 100, 50, darkred, red, quit_programm)
    
     
 
