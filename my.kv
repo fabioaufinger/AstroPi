@@ -1,0 +1,51 @@
+# Filename: my.kv
+
+<MyWidget>:
+    image_camera: image_camera
+    FloatLayout:
+        size_hint: None, None
+        size: root.width, root.height
+        #:set ww 680
+        #:set wh 480
+        canvas:
+            Color:
+                rgba: 0.5, 0.5, 0.5, 1
+            Rectangle: 
+                pos: 0, 500 
+                size: 800, 50
+            Rectangle: 
+                pos: 0, 50 
+                size: 800, 50
+            
+        Label:
+            text: "Test 123"
+            pos: 100, 100
+        Label:
+            text: "Test 123"
+            pos: 100, 200
+        Button:
+            text: "Exit"
+            font_size: 16
+            on_release: app.stop()
+            pos: 680, 500
+            size_hint: 0.1, 0.08
+        Button:
+            text: "Foto"
+            font_size: 16
+            pos: 225, 55
+            size_hint: 0.2, 0.08
+        Button:
+            text: "Video"
+            font_size: 16
+            pos: 410, 55
+            size_hint: 0.2, 0.08
+            
+        Image:
+            id: image_camera
+            
+        Button:
+            text: "Start"
+            font_size: 16
+            pos: 25, 55
+            size_hint: 0.1, 0.08
+            on_release: root.thread_camera()

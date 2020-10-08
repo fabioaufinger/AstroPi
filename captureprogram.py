@@ -1,6 +1,7 @@
 import sys
 import pygame
 import pygame.camera
+import time
 
 pygame.init()
 pygame.camera.init()
@@ -13,7 +14,8 @@ red = (255, 0, 0)
 darkred = (180, 0, 0)
 
 #screen = pygame.display.set_mode((WIDTH, HEIGHT), 0)
-screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+#screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((0,0))
 cam_list = pygame.camera.list_cameras()
 cam = pygame.camera.Camera(cam_list[0],(WIDTH, HEIGHT))
 cam.start()
@@ -29,9 +31,9 @@ def button(msg,x,y,w,h,ic,ac, action=None):
     
     if x+w > mouse[0] > x and y+h > mouse[1] > y:
         pygame.draw.rect(screen, ac,(x,y,w,h))
-        
-        if click[0] == 1 and action != None:
-            action()
+        action()
+        #if click[0] == 1 and action != None:
+            #action()
             
     else:
         pygame.draw.rect(screen, ic,(x,y,w,h))
@@ -42,6 +44,7 @@ def button(msg,x,y,w,h,ic,ac, action=None):
     screen.blit(textSurf, textRect)
     
 def quit_programm():
+    time.sleep(2)
     cam.stop()
     pygame.quit()
     sys.exit()
