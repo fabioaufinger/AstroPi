@@ -34,11 +34,13 @@
             font_size: 16
             pos: 225, 55
             size_hint: 0.2, 0.08
+            on_release: root.thread_foto()
         Button:
             text: "Video"
             font_size: 16
             pos: 410, 55
             size_hint: 0.2, 0.08
+            on_release: root.thread_record()
             
         Image:
             id: image_camera
@@ -46,6 +48,38 @@
         Button:
             text: "Start"
             font_size: 16
+            background_down: '#FF0000'
             pos: 25, 55
             size_hint: 0.1, 0.08
-            on_release: root.thread_camera()
+            on_press: root.thread_camera()
+            on_release: self.parent.remove_widget(self)
+            
+        Button:
+            id: 'settings'
+            pos: 625, 503
+            size_hint: 0.05, 0.06
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            on_press: self.background_color=1,0,0,0.5
+            background_down: '#FF0000'
+            on_release:
+                self.background_color=0,0,0,0
+                root.settings()
+            Image:
+                source: 'settings_icon.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: 35, 35
+                allow_stretch: True
+<Settings>:
+    Label:
+        text: "You pressed the button"
+        size_hint: 0.6, 0.2
+        pos_hint: {"x":0.2, "top":1}
+
+    Button:
+        text: "Save Settings"
+        size_hint: 0.8, 0.2
+        pos_hint: {"x":0.1, "y":0.1}
+        on_release: root.save_settings()
+        
