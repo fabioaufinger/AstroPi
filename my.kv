@@ -18,11 +18,20 @@
                 size: 800, 50
             
         Label:
-            text: "Test 123"
-            pos: 100, 100
+            text: "ISO: " + root.isoLabel
+            pos: 50, 487
+            size_hint: 0.1, 0.1
+            
         Label:
-            text: "Test 123"
-            pos: 100, 200
+            text: "Exposure Time: " + root.exposureLabel
+            pos: 200, 487
+            size_hint: 0.1, 0.1
+            
+        Label:
+            text: "Video Length: " + root.videoLenLabel
+            pos: 400, 487
+            size_hint: 0.1, 0.1
+            
         Button:
             text: "Exit"
             font_size: 16
@@ -72,14 +81,141 @@
                 size: 35, 35
                 allow_stretch: True
 <Settings>:
+    
     Label:
-        text: "You pressed the button"
-        size_hint: 0.6, 0.2
-        pos_hint: {"x":0.2, "top":1}
+        text: 'ISO'
+        size_hint: 0.1, 0.1
+        pos_hint: {"x":0.1, "y":0.9}
+    
+    Button:
+        id: iso_dropdown_btn
+        text: 'Auto'
+        on_parent: iso_dropdown.dismiss()
+        on_release: iso_dropdown.open(self)
+        size_hint: 0.3, 0.1
+        height: '20dp'
+        pos_hint: {"x":0.1, "y":0.8}
+
+    DropDown:
+        id: iso_dropdown
+        on_select: iso_dropdown_btn.text = '{}'.format(args[1])
+
+        Button:
+            text: 'Auto'
+            size_hint_y: None
+            height: '20dp'
+            on_release: iso_dropdown.select('Auto')
+
+        Button:
+            text: '100'
+            size_hint_y: None
+            height: '20dp'
+            on_release: iso_dropdown.select('100')
+
+        Button:
+            text: '300'
+            size_hint_y: None
+            height: '20dp'
+            on_release: iso_dropdown.select('300')
+        
+        Button:
+            text: '800'
+            size_hint_y: None
+            height: '20dp'
+            on_release: iso_dropdown.select('800')
+
+    Label:
+        text: 'Exposure Time'
+        size_hint: 0.1, 0.1
+        pos_hint: {"x":0.7, "y":0.9}
+    
+    Button:
+        id: exposure_dropdown_btn
+        text: 'Auto'
+        on_parent: exposure_dropdown.dismiss()
+        on_release: exposure_dropdown.open(self)
+        size_hint: 0.3, 0.1
+        height: '20dp'
+        pos_hint: {"x":0.6, "y":0.8}
+
+    DropDown:
+        id: exposure_dropdown
+        on_select: exposure_dropdown_btn.text = '{}'.format(args[1])
+
+        Button:
+            text: 'Auto'
+            size_hint_y: None
+            height: '20dp'
+            on_release: exposure_dropdown.select('Auto')
+            
+        Button:
+            text: '10'
+            size_hint_y: None
+            height: '20dp'
+            on_release: exposure_dropdown.select('10')
+
+        Button:
+            text: '1000'
+            size_hint_y: None
+            height: '20dp'
+            on_release: exposure_dropdown.select('1000')
+            
+        Button:
+            text: '6000000'
+            size_hint_y: None
+            height: '20dp'
+            on_release: exposure_dropdown.select('6000000')
+
+    Label:
+        text: 'Video Length [s]'
+        size_hint: 0.1, 0.1
+        pos_hint: {"x":0.2, "y":0.6}
+    
+    Button:
+        id: videoLen_dropdown_btn
+        text: '5'
+        on_parent: videoLen_dropdown.dismiss()
+        on_release: videoLen_dropdown.open(self)
+        size_hint: 0.3, 0.1
+        height: '20dp'
+        pos_hint: {"x":0.1, "y":0.5}
+
+    DropDown:
+        id: videoLen_dropdown
+        on_select: videoLen_dropdown_btn.text = '{}'.format(args[1])
+
+        Button:
+            text: '2'
+            size_hint_y: None
+            height: '20dp'
+            on_release: videoLen_dropdown.select('2')
+            
+        Button:
+            text: '5'
+            size_hint_y: None
+            height: '20dp'
+            on_release: videoLen_dropdown.select('5')
+
+        Button:
+            text: '10'
+            size_hint_y: None
+            height: '20dp'
+            on_release: videoLen_dropdown.select('10')
+            
+        Button:
+            text: '6000000'
+            size_hint_y: None
+            height: '20dp'
+            on_release: exposure_dropdown.select('6000000')
+
 
     Button:
         text: "Save Settings"
         size_hint: 0.8, 0.2
         pos_hint: {"x":0.1, "y":0.1}
-        on_release: root.save_settings()
+        on_release:
+            root.iso_set = iso_dropdown_btn.text
+            root.exposure_set = exposure_dropdown_btn.text
+            root.videoLen_set = videoLen_dropdown_btn.text
+            root.save_settings()
         
